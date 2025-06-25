@@ -41,6 +41,12 @@ app.post("/submit", (req, res) =>{
     
 });
 
+app.post("/delete-post", (req, res) => {
+    const postIndex = parseInt(req.body["postIndex"]);
+    nestPosts.splice(postIndex, 1)
+    res.redirect("/#posts");
+});
+
 app.listen(port, () =>{
     console.log(`App is listening on port ${port}`);
 });

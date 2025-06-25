@@ -4,8 +4,12 @@
 <h2>Your Ki:mi</h2>
 <section id="overview">
     <div id="bio-container">
-        <h3>Anon Ki:mi</h3>
-        <img src="pictures/anonkiwi.jpg" alt="Anon profile picture" class="profile-picture-main">
+        <img src="pictures/anonkiwi.jpg" alt="Anon profile picture" class="profile-picture-main bio-child">
+        <h3 class="bio-child">Anon Ki:mi</h3>
+        <p class="bio-child">bio</p>
+        <button class="bio-child">Edit</button>
+        <button class="bio-child">Share</button>
+        <hr class="bio-child">
     </div>
     <div id="new-post">
         <a href="newPost" class="icon-link">
@@ -13,7 +17,7 @@
             <span class="link-text">New Post</span>
         </a>
     </div>
-    <div>
+    <div id="other-links">
         <div class="overview-link">
             <a href="">Liked</a>
         </div>
@@ -21,7 +25,7 @@
             <a href="">Ki:peeps</a>
         </div>
         <div class="overview-link">
-            <a href="">Search</a>
+            <input type="search" id="site-search" name="q" placeholder="Search" />
         </div>
     </div>
 </section>
@@ -33,11 +37,21 @@
     <div class="nest-posts">
         <% if(locals.availablePosts) {%> 
             <% availablePosts.forEach((post) => {%>
-                <div class="post-block">
-                    <h4><%= post["title"]%></h4>
-                    <p><%= post["content"]%></p>
-                    <small> Chirped: <%= new Date(post["timeStamp"]).toLocaleString()%></small>
-                </div>
+                <a href="post<%= availablePosts.indexOf(post)%>">
+                    <div class="post-block">
+                        <h4><%= post["title"]%></h4>
+                        <p><%= post["content"]%></p>
+                        <small> Chirped: <%= new Date(post["timeStamp"]).toLocaleString()%></small>
+                        <div class="post-buttons">
+                            <button>Edit</button>
+                            <form action="/delete-post" method="POST">
+                                <input type="hidden" name="postIndex" value="<%= availablePosts.indexOf(post)%>">
+                                <button type="submit">Delete</button>
+                            </form>
+                            <button>Share</button>
+                        </div>
+                    </div>
+                </a>
             <%}); %>
         <% } else { %>
             <p>Nothing to see here. Have you tried looking for worms?</p>
