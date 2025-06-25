@@ -1,0 +1,38 @@
+<%- include("partials/header.ejs") %>
+<h1>Welcome to Ki:we</h1>
+
+<h2>Your Ki:mi</h2>
+<section id="overview">
+    <div id="bio-container">
+        <h3>Anon Ki:mi</h3>
+        <img src="pictures/anonkiwi.jpg" alt="Anon profile picture" class="profile-picture-main">
+    </div>
+    <div>
+        <a href="newPost">New post</a>
+    </div>
+    <div>
+        <div class="overview-link">
+            <a href="">Liked</a>
+        </div>
+        <div class="overview-link">
+            <a href="">Ki:peeps</a>
+        </div>
+        <div class="overview-link">
+            <a href="">Search</a>
+        </div>
+    </div>
+</section>
+
+<h2>Your nest</h2>
+<h3>Trending tags</h3>
+<div class="nest-posts">
+    <% if(locals.availablePosts) {%> 
+        <%  %>
+    <% } else { %>
+        <p>Nothing to see here. Have you tried looking for worms?</p>
+    <% } %>
+</div>
+
+
+<%- include("partials/footer.ejs") %>
+

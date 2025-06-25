@@ -1,0 +1,14 @@
+<%- include("partials/header.ejs") %>
+<h1>New post</h1>
+<form action="/submit" method="POST">
+    <input type="text" name="title" placeholder="title">
+    <input type="textarea" name="text" id="">
+    <input type="submit" value="Chirp">
+</form>
+
+<div class="nest-posts">
+
+</div>
+
+
+<%- include("partials/footer.ejs") %>
