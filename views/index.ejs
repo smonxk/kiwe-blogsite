@@ -7,8 +7,11 @@
         <h3>Anon Ki:mi</h3>
         <img src="pictures/anonkiwi.jpg" alt="Anon profile picture" class="profile-picture-main">
     </div>
-    <div>
-        <a href="newPost">New post</a>
+    <div id="new-post">
+        <a href="newPost" class="icon-link">
+            <span class="material-symbols-outlined">egg</span>
+            <span class="link-text">New Post</span>
+        </a>
     </div>
     <div>
         <div class="overview-link">
@@ -23,15 +26,24 @@
     </div>
 </section>
 
-<h2>Your nest</h2>
-<h3>Trending tags</h3>
-<div class="nest-posts">
-    <% if(locals.availablePosts) {%> 
-        <%  %>
-    <% } else { %>
-        <p>Nothing to see here. Have you tried looking for worms?</p>
-    <% } %>
-</div>
+
+<section id="posts">
+    <h2>Your nest</h2>
+    <h3>Trending tags</h3>
+    <div class="nest-posts">
+        <% if(locals.availablePosts) {%> 
+            <% availablePosts.forEach((post) => {%>
+                <div class="post-block">
+                    <h4><%= post["title"]%></h4>
+                    <p><%= post["content"]%></p>
+                    <small> Chirped: <%= new Date(post["timeStamp"]).toLocaleString()%></small>
+                </div>
+            <%}); %>
+        <% } else { %>
+            <p>Nothing to see here. Have you tried looking for worms?</p>
+        <% } %>
+    </div>
+</section>
 
 
 <%- include("partials/footer.ejs") %>

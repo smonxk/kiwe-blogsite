@@ -2,6 +2,8 @@
     --lightblue : #B3C8CF;
     --darkblue: #6a8b96;
     --white: #F1F0E8;
+    --grayblue: #8ca3b3;
+    --white-rgb: 241, 240, 232;
     --main-font: "Roboto Condensed", sans-serif;
     --second-font: "Anta", sans-serif;
 }
@@ -49,6 +51,11 @@ h1 {
     justify-self: center;
     font-size: 5em;
     font-family: var(--second-font);
+    color: var(--white);
+
+    border: 2px solid var(--white);
+    padding: 0.25em 0.75em 0.25em 0.75em;
+    border-radius: 75px;
     
 }
 
@@ -56,6 +63,7 @@ footer {
     position: fixed;
     bottom: 0;
 }
+
 
 #overview {
     display: flex;
@@ -74,13 +82,104 @@ footer {
 
 }
 
+#new-post {
+    background-color: var(--white);
+    border-radius: 35px;
+    width: 13vw;
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+    'FILL' 0,      /* Solid (1) or outline (0) */
+    'wght' 400,    /* Weight (100-700) */
+    'GRAD' 0,      /* Gradiant (-50 to 200) */
+    'opsz' 40;     /* Size (20-48) */
+  font-size: 1.5rem; /* Visual size */
+  vertical-align: middle; /* Align with text */
+}
+
+
 .profile-picture-main {
     height: 20vh;
     border-radius: 50%;
 }
 
 .overview-link {
-    background-color: var(--darkblue);
+    background-color: var(--grayblue);
     padding: 10px;
     border-radius: 25px;
+}
+
+.overview-link  a {
+    text-decoration: none;
+    color: var(--white);
+}
+
+.overview-link  a:visited {
+    text-decoration: none;
+    color: var(--white);
+}
+
+/* posts */
+#posts {
+    margin: 4em 0 4em 0;
+}
+
+
+#posts > h2 {
+    text-align: center;
+    justify-self: center;
+    font-size: 3em;
+    margin-bottom: 1em;
+
+    font-family: var(--second-font);
+    color: var(--lightblue);
+    background-color: var(--white);
+    width: 18vw;
+
+    border-radius: 45px;
+    padding: 0.25em 0.75em 0.25em 0.75em;
+}
+
+
+
+.nest-posts {
+    background-color: #8ca3b3;
+    border-radius: 45px;
+    width: 90vw;
+    justify-self: center;
+    padding: 1em;
+    
+    display: grid;
+    grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+    justify-items: center;
+
+    gap: 1em;
+}
+
+.post-block {
+    display: flex;
+    flex-direction: column;
+
+    border: 2px solid var(--white);
+    padding: 1em 0.75em 0.25em 0.75em;
+    border-radius: 35px;
+
+    height: 25vh;
+    width: 14vw;
+
+    color: var(--white);
+
+}
+
+
+.post-block > h4 {
+    font-size: 24pt;
+    font-family: var(--second-font);
+    margin: 0.5em 0 0.5em 0;
 }
