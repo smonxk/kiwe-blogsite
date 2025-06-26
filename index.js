@@ -4,7 +4,9 @@ import express from "express";
 
 const app = express();
 const port = 3000;
-var nestPosts = [];
+let nestPosts = [];
+let postIdCounter = 0;
+
 
 function NestPost(title, tags, content, posted, rechirped){
     this.title = title;
@@ -13,10 +15,14 @@ function NestPost(title, tags, content, posted, rechirped){
     this.posted = posted;
     this.timeStamp = new Date();
     this.rechirped = rechirped;
+    this.id = postIdCounter++;
 }
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
+
+
+app.locals.truncator = truncator;
 
 app.get("/", (req,res) => {
     const  sortedPosts = [...nestPosts].sort((a,b) => b["timeStamp"] - a["timeStamp"]);
@@ -55,30 +61,41 @@ app.post("/delete-post", (req, res) => {
 
 //editing a post
 app.get("/posts/:id/edit", (req, res) =>{
-    const postId = req.params.id;
-    const post = nestPosts[postId]; //udelat na tohle fci
+    const postId = parseInt(req.params.id);
+    const post = nestPosts.find(p => p["id"] === postId)
+    
+    if(!post){
+        return res.status(404).send("Post not found");
+    }
+    
     res.render("editPost.ejs", {
         post,
-        postId
+        postId: post["id"]
     })
 })
 
 app.post("/submitEdit/:id", (req, res) =>{
-    const postId = req.params.id;
-    const post = nestPosts[postId];
+    const postId = parseInt(req.params.id);
+    const post = nestPosts.find(p => p["id"] === postId)
+
+    if (!post) {
+        return res.status(404).send("Post not found");
+    }
+
 
     post["rechirped"] = true;
     post["title"] = req.body["title"];
     post["content"] = req.body["content"];
     post["timeStamp"] = new Date();
 
+
     res.redirect("/#posts")
 });
 
 //viewing a post 
 app.get("/posts/:id", (req, res) => {
-    const postId = req.params.id;
-    const post = nestPosts[postId];
+    const postId = parseInt(req.params.id);
+    const post = nestPosts.find(p => p["id"] === postId)
     res.render("viewPost.ejs", {
         post, 
         postId
@@ -91,3 +108,18 @@ app.listen(port, () =>{
 });
 
 
+function truncator(text, textCharCount, firstWordCharCount){ 
+    if(!text) return "";
+
+    const words = text.trim().split(/\s+/);
+    const firstWordLength = words[0] ? words[0].length : 0;
+
+    if(firstWordLength > firstWordCharCount){
+        return text.slice(0, firstWordCharCount) + "...";
+    }
+    else if(text.length > textCharCount ){
+        return text.slice(0, textCharCount) + "...";
+    }
+
+    return text;
+}
