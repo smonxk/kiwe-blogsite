@@ -1,0 +1,25 @@
+<%- include("partials/header.ejs") %>
+
+<form action="/submitEdit/<%= postId %>" method="POST">
+   <h1 class="edit">
+        <input 
+            type="text" 
+            name="title" 
+            value="<%= post.title %>" 
+            maxlength="50"
+            class="title-input"
+        >
+    </h1>
+    <section class="time-container">
+        <small class="full-post-time">Chirped: <%= new Date(post["timeStamp"]).toLocaleString() %></small>
+    </section>
+
+    <section class="content-container edit">
+        <textarea name="content" class="content-input"><%= post.content %></textarea>
+    </section>
+
+    <div class="confirm-button-container">
+        <button type="submit" class="edit">Confirm</button>  
+    </div>
+</form>
+<%- include("partials/footer.ejs") %>

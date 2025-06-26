@@ -36,14 +36,13 @@
     <h3>Trending tags</h3>
     <div class="nest-posts">
         <% if(locals.availablePosts) {%> 
-            <% availablePosts.forEach((post) => {%>
-                <a href="post<%= availablePosts.indexOf(post)%>">
-                    <div class="post-block">
+            <% availablePosts.forEach((post, index) => {%>
+                    <div class="post-block" onclick="window.location='/posts/<%= index%>'">
                         <h4><%= post["title"]%></h4>
                         <p><%= post["content"]%></p>
-                        <small> Chirped: <%= new Date(post["timeStamp"]).toLocaleString()%></small>
+                        <small> <%= post["rechirped"] ? "Rechirped" : "Chirped"%>: <%= new Date(post["timeStamp"]).toLocaleString()%></small>
                         <div class="post-buttons">
-                            <button>Edit</button>
+                            <a href="/posts/<%= index%>/edit">Edit</a>
                             <form action="/delete-post" method="POST">
                                 <input type="hidden" name="postIndex" value="<%= availablePosts.indexOf(post)%>">
                                 <button type="submit">Delete</button>
@@ -51,7 +50,6 @@
                             <button>Share</button>
                         </div>
                     </div>
-                </a>
             <%}); %>
         <% } else { %>
             <p>Nothing to see here. Have you tried looking for worms?</p>

@@ -1,0 +1,10 @@
+<%- include("partials/header.ejs") %>
+    <h1><%= post["title"]%></h1>
+    <section class="time-container">
+          <small class="full-post-time">Chirped: <%= new Date(post["timeStamp"]).toLocaleString() %></small>
+    </section>
+
+    <section class="content-container">
+        <textarea><%= post["content"]%></textarea>
+    </section>
+<%- include("partials/footer.ejs") %>
