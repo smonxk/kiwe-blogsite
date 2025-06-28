@@ -1,6 +1,6 @@
 <%- include("partials/header.ejs") %>
 
-<form action="/submitEdit/<%= post["id"]%>" method="POST">
+<form action="/submitEdit/<%= post["id"]%>" method="POST" id="edit-post-form">
    <h1 class="edit">
         <input 
             type="text" 
@@ -12,13 +12,13 @@
             oninput="validate(this)"
         >
     </h1>
-    <section class="time-container">
+    <fieldset class="time-container">
         <small class="full-post-time">Chirped: <%= new Date(post["timeStamp"]).toLocaleString() %></small>
-    </section>
+    </fieldset>
 
-    <section class="content-container edit">
+    <fieldset class="content-container edit">
         <textarea name="content" class="content-input" required oninput="validate(this)"><%= post["content"]%></textarea>
-    </section>
+    </fieldset>
 
     <div class="confirm-button-container">
         <button type="submit" class="edit">Confirm</button>  
